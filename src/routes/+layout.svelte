@@ -1,5 +1,6 @@
 <script>
 	import '../app.css';
+	import { navigating } from '$app/stores';
 </script>
 
 <svelte:head>
@@ -19,7 +20,7 @@
 <header class="select-none">
 	<a href="/" class="title">Rafi Soemarno</a>
 	<menu>
-		<a href="/about" class="link">About</a>
+		<a href="/about" data-sveltekit-preload-data data-sveltekit-preload-code="eager" class="link">About</a>
 		<a href="/work" class="link">Work</a>
 	</menu>
 	<div class="meta">
