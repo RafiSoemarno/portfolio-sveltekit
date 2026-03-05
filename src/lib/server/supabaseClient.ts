@@ -1,4 +1,11 @@
-import { createClient } from '@supabase/supabase-js'
-import { DB_URL, API_KEY } from '$env/static/private';
+import { createClient } from '@supabase/supabase-js';
+import { env } from '$env/dynamic/private';
 
-export const supabase = createClient(DB_URL, API_KEY)
+const dbUrl = env.DB_URL?.trim();
+const apiKey = env.API_KEY?.trim();
+const hasValidSupabaseEnv = Boolean(dbUrl && apiKey);
+
+export const supabase = hasValidSupabaseEnv ? createClient(dbUrl!, apiKey!) : null;
+export const supabaseClientError = hasValidSupabaseEnv
+	? null
+	: 'Missing DB_URL or API_KEY environment variables.';

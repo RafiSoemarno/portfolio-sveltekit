@@ -35,10 +35,14 @@
 			<div class="grid grid-cols-1 gap-5">
 				{#await data.streamed.achievements}
 					<h1>Loading...</h1>
-				{:then data} 
-					{#each data as achievement}
-						<Achievement icon={achievement.icon} name={achievement.name} date={achievement.date} />
-					{/each}
+				{:then result}
+					{#if result.ok}
+						{#each result.data as achievement}
+							<Achievement icon={achievement.icon} name={achievement.name} date={achievement.date} />
+						{/each}
+					{:else}
+						<h1 class="load-error">{result.error}</h1>
+					{/if}
 				{/await}
 			</div>
 		</div>
@@ -47,10 +51,14 @@
 			<div class="grid grid-cols-2 gap-5">
 				{#await data.streamed.skills}
 					<h1>Loading...</h1>
-				{:then data} 
-					{#each data as skill}
-						<Skill icon={skill.icon} name={skill.name} level={skill.level} />
-					{/each}
+				{:then result}
+					{#if result.ok}
+						{#each result.data as skill}
+							<Skill icon={skill.icon} name={skill.name} level={skill.level} />
+						{/each}
+					{:else}
+						<h1 class="load-error col-span-2">{result.error}</h1>
+					{/if}
 				{/await}
 			</div>
 		</div>
@@ -68,5 +76,9 @@
 
 	.detail {
 		@apply flex items-center gap-2 text-2xl;
+	}
+
+	.load-error {
+		@apply text-base text-red-300;
 	}
 </style>
