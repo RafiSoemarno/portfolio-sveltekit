@@ -1,13 +1,36 @@
 <script>
-	import Starfield from '$lib/Starfield.svelte';
+	import { tweened } from 'svelte/motion';
+	import { cubicInOut } from 'svelte/easing';
+	import { goto } from '$app/navigation';
+
+	const opacity = tweened(1, {
+			duration: 2000,
+			easing: cubicInOut
+		}),
+		speed = tweened(3, {
+			duration: 2000,
+			easing: cubicInOut
+		});
+
+	function transition() {
+		$opacity = 0;
+		$speed = 24;
+
+		setTimeout(() => {
+			$speed = 0;
+		}, 2000);
+
+		setTimeout(() => {
+			goto('/work');
+		}, 4000);
+	}
 </script>
 
-<div id="hero">
-	<a id="hero-button" href="/work">See my work.</a>
+<div id="hero" style="opacity: {$opacity}">
+	<button id="hero-button" on:click={transition}>See my work.</button>
 	<h1 id="hero-header">I build functional web experiences.</h1>
 </div>
 <div id="cover" />
-<Starfield />
 
 <style lang="postcss">
 	#cover {
@@ -28,10 +51,10 @@
 		@apply relative text-4xl w-fit text-zinc-200 mx-auto p-4 rounded-2xl border-4 border-zinc-200 transition-all duration-500;
 	}
 	#hero-button:hover {
-		@apply text-transparent bg-zinc-200;
+		@apply text-zinc-900 bg-zinc-200;
 	}
 	#hero-button::after {
-		@apply transition-all duration-700;
+		@apply transition-all duration-500 bg-blue-300;
 		content: '';
 		opacity: 0;
 		position: absolute;
@@ -42,16 +65,6 @@
 		bottom: -3px;
 		right: -3px;
 		border-radius: 1.25rem;
-		background: conic-gradient(
-			from var(--a) at 50% 50%,
-			#e8515c 0deg,
-			#fe6ebd 45deg,
-			#5cadfe 90deg,
-			#75f5d8 150deg,
-			#fdf175 225deg,
-			#fe8564 290deg,
-			#e8515c 1turn
-		);
 		will-change: auto;
 		animation: a 1.5s linear infinite;
 	}
