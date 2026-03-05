@@ -1,4 +1,4 @@
-import { supabase } from "$lib/server/supabaseClient";
+/*import { supabase } from "$lib/server/supabaseClient";
 
 export async function GET() {
   const { data: achievementRaw, error: achievementError } = await supabase.storage.from('about').download('achievements.json')
@@ -15,4 +15,4 @@ export async function GET() {
     type: "application/json",
   });
   return new Response(blob);
-}
+}*/

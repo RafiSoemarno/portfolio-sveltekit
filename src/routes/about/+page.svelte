@@ -2,7 +2,40 @@
 	import Skill from './Skill.svelte';
 	import Achievement from './Achievement.svelte';
 
-	export let data;
+	interface Icon {
+		class: string;
+		name: string;
+	}
+
+	interface Achievement {
+		icon: Icon;
+		name: string;
+		date: string;
+	}
+
+	interface Skill {
+		icon: string;
+		name: string;
+		level: number;
+	}
+
+	interface PageData {
+		streamed: {
+			achievements: Promise<Achievement[]>;
+			skills: Promise<Skill[]>;
+		};
+	}
+
+	export let data: PageData;
+
+	function withTimeout<T>(promise: Promise<T>, timeoutMs: number = 5000): Promise<T> {
+		return Promise.race([
+			promise,
+			new Promise<T>((_, reject) =>
+				setTimeout(() => reject(new Error('Request timeout')), timeoutMs)
+			)
+		] as const);
+	}
 </script>
 
 <svelte:head />
@@ -33,24 +66,28 @@
 		<div class="flex flex-col gap-5">
 			<h2 class="text-3xl text-center">Education</h2>
 			<div class="grid grid-cols-1 gap-5">
-				{#await data.streamed.achievements}
+				{#await withTimeout(data.streamed.achievements)}
 					<h1>Loading...</h1>
-				{:then data} 
-					{#each data as achievement}
+				{:then achievements}
+					{#each achievements as achievement}
 						<Achievement icon={achievement.icon} name={achievement.name} date={achievement.date} />
 					{/each}
+				{:catch error}
+					<p class="text-red-400">Failed to load achievements: {error instanceof Error ? error.message : 'Unknown error'}</p>
 				{/await}
 			</div>
 		</div>
 		<div class="flex flex-col gap-5">
 			<h2 class="text-3xl text-center">Skills</h2>
 			<div class="grid grid-cols-2 gap-5">
-				{#await data.streamed.skills}
+				{#await withTimeout(data.streamed.skills)}
 					<h1>Loading...</h1>
-				{:then data} 
-					{#each data as skill}
+				{:then skills}
+					{#each skills as skill}
 						<Skill icon={skill.icon} name={skill.name} level={skill.level} />
 					{/each}
+				{:catch error}
+					<p class="text-red-400">Failed to load skills: {error instanceof Error ? error.message : 'Unknown error'}</p>
 				{/await}
 			</div>
 		</div>

@@ -1,4 +1,4 @@
-export async function load({ fetch }) {
+/*export async function load({ fetch }) {
     const response = await fetch('/about', {
         method: 'GET',
         headers: {
@@ -7,4 +7,4 @@ export async function load({ fetch }) {
     })
     const data = await response.json()
     return data;
-}
+}*/
