@@ -28,6 +28,15 @@
 
 	let achievements: LoadResult<AchievementData[]> | null = null;
 	let skills: LoadResult<SkillData[]> | null = null;
+	let achievementsError: string | null = null;
+	let skillsError: string | null = null;
+
+	function getError<T>(result: LoadResult<T> | null): string | null {
+		return result && result.ok === false ? result.error : null;
+	}
+
+	$: achievementsError = getError(achievements);
+	$: skillsError = getError(skills);
 
 	function withTimeout<T>(
 		promise: Promise<T>,
@@ -125,7 +134,7 @@
 						<Achievement icon={achievement.icon} name={achievement.name} date={achievement.date} />
 					{/each}
 				{:else}
-					<h1 class="load-error">{achievements.error}</h1>
+					<h1 class="load-error">{achievementsError}</h1>
 				{/if}
 			</div>
 		</div>
@@ -139,7 +148,7 @@
 						<Skill icon={skill.icon} name={skill.name} level={skill.level} />
 					{/each}
 				{:else}
-					<h1 class="load-error col-span-2">{skills.error}</h1>
+					<h1 class="load-error col-span-2">{skillsError}</h1>
 				{/if}
 			</div>
 		</div>
