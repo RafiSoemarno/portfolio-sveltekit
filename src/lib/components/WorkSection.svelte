@@ -85,10 +85,10 @@
 			cooldown = false;
 		}, 1200);
 		const closest = closestElement();
-		const closest2 = works[parseInt((closest as HTMLElement).dataset.workId!)];
+		const closestWork = works[parseInt((closest as HTMLElement).dataset.workId!)];
 		carousel.dataset.mouseDownAt = '0';
 		carousel.dataset.prevOffset = carousel.dataset.offset;
-		changeFocus(closest2.workId);
+		changeFocus(closestWork.workId);
 	}
 
 	function handleMove(event: MouseEvent | Touch) {
