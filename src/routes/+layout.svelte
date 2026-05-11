@@ -19,8 +19,8 @@
 <header class="select-none">
 	<a href="/" class="title">Rafi Soemarno</a>
 	<menu>
-		<a href="/about" class="link">About</a>
-		<a href="/work" class="link">Work</a>
+		<a href="#about" class="link">About</a>
+		<a href="#work" class="link">Work</a>
 	</menu>
 	<div class="meta">
 		<a href="mailto:soemarnorafi@gmail.com" target="_blank"
@@ -40,7 +40,7 @@
 
 <style lang="postcss">
 	main {
-		@apply flex h-screen;
+		@apply flex flex-col min-h-screen;
 	}
 
 	header {
