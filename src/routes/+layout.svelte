@@ -23,7 +23,9 @@
 		<a href="#about" data-sveltekit-preload-data data-sveltekit-preload-code="eager" class="link"
 			>About</a
 		>
-		<a href="#work" class="link">Work</a>
+		<a href="#work" data-sveltekit-preload-data data-sveltekit-preload-code="eager" class="link"
+			>Work</a
+		>
 	</menu>
 	<div class="meta">
 		<a href="mailto:soemarnorafi@gmail.com" target="_blank"
