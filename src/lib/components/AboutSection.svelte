@@ -101,7 +101,7 @@
 	});
 </script>
 
-<div class="bg-primary text-gray-300 ps-32 my-auto max-h-[70%]">
+<main class="bg-primary text-gray-300 ps-32 my-auto max-h-[70%]">
 	<div class="flex flex-row justify-center gap-12">
 		<div class="flex flex-col gap-5">
 			<h2 class="text-3xl text-center">Status</h2>
@@ -153,7 +153,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</main>
 
 <style lang="postcss">
 	.detail {
