@@ -1,5 +1,6 @@
 <script>
 	import '../app.css';
+	import Starfield from '$lib/Starfield.svelte';
 </script>
 
 <svelte:head>
@@ -19,8 +20,12 @@
 <header class="select-none">
 	<a href="/" class="title">Rafi Soemarno</a>
 	<menu>
-		<a href="/about" class="link">About</a>
-		<a href="/work" class="link">Work</a>
+		<a href="#about" data-sveltekit-preload-data data-sveltekit-preload-code="eager" class="link"
+			>About</a
+		>
+		<a href="#work" data-sveltekit-preload-data data-sveltekit-preload-code="eager" class="link"
+			>Work</a
+		>
 	</menu>
 	<div class="meta">
 		<a href="mailto:soemarnorafi@gmail.com" target="_blank"
@@ -36,11 +41,13 @@
 </header>
 <main>
 	<slot />
+	<div class="gradient-background" />
+	<Starfield />
 </main>
 
 <style lang="postcss">
 	main {
-		@apply flex h-screen;
+		@apply relative flex min-h-screen flex-col overflow-y-auto;
 	}
 
 	header {
@@ -61,5 +68,32 @@
 
 	.meta {
 		@apply flex items-center text-zinc-100 self-end gap-6 ms-auto pr-10;
+	}
+
+	@property --deg {
+		syntax: '<angle>';
+		inherits: false;
+		initial-value: 120deg;
+	}
+
+	.gradient-background {
+		@apply fixed w-full h-full -z-10 opacity-20;
+
+		background: linear-gradient(var(--deg), #18181b 50%, #8ec5ff, #a3b3ff);
+		background-size: 180% 180%;
+		background-position: 50% 50%;
+		animation: gradient-animation 9s linear 0s infinite alternate;
+	}
+
+	@keyframes gradient-animation {
+		0% {
+			--deg: 120deg;
+		}
+		50% {
+			--deg: 170deg;
+		}
+		100% {
+			--deg: 220deg;
+		}
 	}
 </style>

@@ -1,8 +1,8 @@
 <script lang="ts">
 	interface Icon {
-		class: string
-		name: string
-	};
+		class: string;
+		name: string;
+	}
 	export let icon: Icon;
 	export let name: string;
 	export let date: string;

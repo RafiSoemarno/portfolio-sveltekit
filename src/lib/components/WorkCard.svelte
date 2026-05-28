@@ -1,12 +1,12 @@
 <script lang="ts">
 	export let workId: number;
-	export let img: string = "https://placehold.co/800x600";
-	export let alt: string = "placeholder";
-	export let focused: boolean = false;
+	export let img = 'https://placehold.co/800x600';
+	export let alt = 'placeholder';
+	export let focused = false;
 </script>
 
 <div class="bounding-container {focused ? 'focused' : ''}" data-work-id={workId}>
-	<img src={img} alt={alt} />
+	<img src={img} {alt} />
 </div>
 
 <style lang="postcss">
@@ -27,5 +27,4 @@
 	.focused > img {
 		@apply scale-x-50;
 	}
-
 </style>
