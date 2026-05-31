@@ -1,0 +1,12 @@
+[
+  {
+    "icon": { "class": "material-icons-round", "name": "school" },
+    "name": "Binus International — Business Information Systems",
+    "date": "2022 – Present"
+  },
+  {
+    "icon": { "class": "material-icons-round", "name": "emoji_events" },
+    "name": "Dean's List — Semester 3",
+    "date": "2023"
+  }
+]

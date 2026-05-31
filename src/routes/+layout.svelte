@@ -1,56 +1,58 @@
 <script>
 	import '../app.css';
-	import { navigating } from '$app/stores';
 	import Starfield from '$lib/Starfield.svelte';
 </script>
 
 <svelte:head>
-	<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet" />
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" />
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" />
-	<link
-		rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/brands.min.css"
-		integrity="sha512-lCU0XyQA8yobR7ychVxEOU5rcxs0+aYh/9gNDLaybsgW9hdrtqczjfKVNIS5doY0Y5627/+3UVuoGv7p8QsUFw=="
-		crossorigin="anonymous"
-		referrerpolicy="no-referrer"
-	/>
+	<title>Rafi Soemarno</title>
+	<meta name="description" content="Portfolio of Rafi Soemarno — developer building functional web experiences." />
+	<meta property="og:title" content="Rafi Soemarno" />
+	<meta property="og:description" content="Portfolio of Rafi Soemarno — developer building functional web experiences." />
+	<meta property="og:type" content="website" />
+	<link rel="stylesheet" href="/fonts/quicksand.css" />
+	<link rel="stylesheet" href="/fonts/material-icons-round.css" />
+	<link rel="stylesheet" href="/fonts/material-icons-outlined.css" />
+	<link rel="stylesheet" href="/fonts/fa-brands.css" />
 </svelte:head>
 
 <header class="select-none">
-	<a href="/" class="title">Rafi Soemarno</a>
+	<a href="/#hero" class="title">Rafi Soemarno</a>
 	<menu>
-		<a href="/about" data-sveltekit-preload-data data-sveltekit-preload-code="eager" class="link"
-			>About</a
-		>
-		<a href="/work" class="link">Work</a>
+		<a href="/#about" class="link">About</a>
+		<a href="/#work" class="link">Work</a>
 	</menu>
 	<div class="meta">
-		<a href="mailto:soemarnorafi@gmail.com" target="_blank"
+		<a href="mailto:soemarnorafi@gmail.com" target="_blank" rel="noopener noreferrer"
 			><span class="material-icons-round align-middle contact">mail</span> soemarnorafi@gmail.com</a
 		>
-		<a href="https://github.com/RafiSoemarno" target="_blank"
+		<a href="https://github.com/RafiSoemarno" target="_blank" rel="noopener noreferrer"
 			><span class="fab fa-github contact align-middle" /> RafiSoemarno</a
 		>
-		<a href="https://www.linkedin.com/in/rafi-soemarno/" target="_blank"
+		<a href="https://www.linkedin.com/in/rafi-soemarno/" target="_blank" rel="noopener noreferrer"
 			><span class="fab fa-linkedin contact align-middle" /> Rafi Soemarno</a
 		>
 	</div>
 </header>
+
 <main>
 	<slot />
-	<div class="gradient-background" />
-	<Starfield />
 </main>
+
+<div class="base-background" aria-hidden="true" />
+<div class="gradient-background" aria-hidden="true" />
+<Starfield />
 
 <style lang="postcss">
 	main {
-		@apply flex h-screen overflow-hidden;
+		@apply relative flex flex-col;
+		z-index: 3;
 	}
 
 	header {
-		@apply absolute flex w-full p-8 pl-12;
+		@apply fixed top-0 left-0 right-0 flex w-full p-8 pl-12;
+		z-index: 50;
+		background: linear-gradient(to bottom, rgba(24,24,27,0.7) 0%, transparent 100%);
+		backdrop-filter: none;
 	}
 
 	.title {
@@ -69,6 +71,15 @@
 		@apply flex items-center text-zinc-100 self-end gap-6 ms-auto pr-10;
 	}
 
+	.contact {
+		@apply align-middle;
+	}
+
+	.base-background {
+		@apply fixed inset-0 bg-zinc-900;
+		z-index: 0;
+	}
+
 	@property --deg {
 		syntax: '<angle>';
 		inherits: false;
@@ -76,8 +87,8 @@
 	}
 
 	.gradient-background {
-		@apply absolute w-full h-full -z-10 opacity-20;
-
+		@apply fixed inset-0 opacity-20 pointer-events-none;
+		z-index: 1;
 		background: linear-gradient(var(--deg), #18181b 50%, #8ec5ff, #a3b3ff);
 		background-size: 180% 180%;
 		background-position: 50% 50%;
@@ -85,14 +96,9 @@
 	}
 
 	@keyframes gradient-animation {
-		0% {
-			--deg: 120deg;
-		}
-		50% {
-			--deg: 170deg;
-		}
-		100% {
-			--deg: 220deg;
-		}
+		0%   { --deg: 120deg; }
+		50%  { --deg: 170deg; }
+		100% { --deg: 220deg; }
 	}
 </style>
+
