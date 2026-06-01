@@ -7,7 +7,7 @@
 	$: imageRight = index % 2 !== 0;
 </script>
 
-<article class="work-card {imageRight ? 'image-right' : ''}">
+<article class="work-card glass {imageRight ? 'image-right' : ''}">
 	<div class="image-wrap">
 		<img src={work.image} alt={work.title} />
 	</div>
@@ -33,10 +33,6 @@
 <style lang="postcss">
 	.work-card {
 		@apply flex flex-row items-center gap-10 w-full p-8;
-		background: rgba(255, 255, 255, 0.04);
-		border: 1px solid rgba(255, 255, 255, 0.08);
-		border-radius: 1.25rem;
-		backdrop-filter: blur(6px);
 	}
 
 	.work-card.image-right {

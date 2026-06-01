@@ -4,7 +4,7 @@
 	export let level: number; // retained for data compatibility
 </script>
 
-<li class="skill" title="Proficiency: {level}/5" aria-label="{name}, proficiency {level} out of 5">
+<li class="skill glass" title="Proficiency: {level}/5" aria-label="{name}, proficiency {level} out of 5">
 	<span class="{icon} skill-icon" aria-hidden="true" />
 	<span class="skill-name">{name}</span>
 	<span class="pip-row" aria-hidden="true">
@@ -16,8 +16,7 @@
 
 <style lang="postcss">
 	.skill {
-		@apply flex items-center gap-3 px-4 py-3 rounded-2xl bg-white bg-opacity-[0.07]
-		       border border-white border-opacity-[0.08] list-none;
+		@apply flex items-center gap-3 px-4 py-3 list-none;
 	}
 
 	.skill-icon {

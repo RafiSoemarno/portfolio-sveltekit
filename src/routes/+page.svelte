@@ -94,12 +94,14 @@
 ══════════════════════════════════════════ -->
 <section id="work">
 	<div class="section-content">
-		<h2 class="work-heading">Work</h2>
-		<div class="work-list">
-			{#each data.works as work, i}
-				<WorkCard {work} index={i} />
-			{/each}
-		</div>
+		<section class="sub-section">
+			<h2 class="section-heading">Work</h2>
+			<div class="work-list">
+				{#each data.works as work, i}
+					<WorkCard {work} index={i} />
+				{/each}
+			</div>
+		</section>
 	</div>
 </section>
 
@@ -164,7 +166,7 @@
 	#about {
 		@apply flex flex-col;
 		min-height: 100vh;
-		padding: 6rem 2rem;
+		padding: 6rem 2rem 0;
 		gap: 3rem;
 	}
 
@@ -226,16 +228,12 @@
 	#work {
 		@apply flex flex-col;
 		min-height: 100vh;
-		padding: 6rem 2rem;
+		padding: 2rem 2rem 3rem;
 		gap: 0;
 	}
 
-	.work-heading {
-		@apply text-xs font-semibold tracking-widest uppercase text-zinc-500 mb-12;
-	}
-
 	.work-list {
-		@apply flex flex-col gap-16;
+		@apply flex flex-col gap-5;
 	}
 </style>
 
