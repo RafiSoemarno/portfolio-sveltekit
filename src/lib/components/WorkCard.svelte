@@ -32,19 +32,37 @@
 
 <style lang="postcss">
 	.work-card {
-		@apply flex flex-row items-center gap-10 w-full p-8;
+		@apply flex flex-col items-start gap-6 w-full p-5;
 	}
 
 	.work-card.image-right {
-		@apply flex-row-reverse;
+		@apply md:flex-row-reverse;
+	}
+
+	@screen md {
+		.work-card {
+			@apply flex-row items-center gap-10 p-8;
+		}
 	}
 
 	.image-wrap {
-		@apply flex-shrink-0 w-80 rounded-2xl overflow-hidden;
+		@apply w-full rounded-2xl overflow-hidden;
+	}
+
+	@screen md {
+		.image-wrap {
+			@apply flex-shrink-0 w-80;
+		}
 	}
 
 	img {
-		@apply w-full h-56 object-cover;
+		@apply w-full h-52 object-cover;
+	}
+
+	@screen md {
+		img {
+			@apply h-56;
+		}
 	}
 
 	.content {

@@ -108,7 +108,7 @@
 	}
 
 	header.menu-open {
-		background: rgba(255, 255, 255, 0.07);
+		background: rgba(24, 24, 27, 0.25);
 		backdrop-filter: blur(6px);
 	}
 
@@ -165,13 +165,14 @@
 		@apply fixed left-0 right-0 flex flex-col text-zinc-100;
 		top: 64px;
 		z-index: 49;
-		background: rgba(255, 255, 255, 0.07);
+		background: rgba(24, 24, 27, 0.25);
 		backdrop-filter: blur(6px);
 		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 	}
 
 	.mobile-link {
-		@apply text-2xl px-8 py-5 border-b border-zinc-800 hover:bg-zinc-800 transition-colors;
+		@apply text-2xl px-8 py-5 border-b border-zinc-800 transition-colors;
+		&:hover { background: rgba(24, 24, 27, 0.4); }
 	}
 
 	.mobile-meta {
