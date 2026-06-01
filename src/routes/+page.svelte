@@ -40,62 +40,66 @@
      ABOUT
 ══════════════════════════════════════════ -->
 <section id="about">
-	<div class="about-bio glass">
-		<p class="greeting">Hi, I'm Rafi.</p>
-		<p class="tagline">
-			I'm a Business Information Systems student at Binus International, based in Bogor, Indonesia.
-			I enjoy building clean, functional web experiences — from thoughtful UI to solid backends.
-		</p>
-		<ul class="status-list">
-			{#each status as item}
-				<li>
-					<span class="material-icons-round status-icon select-none" aria-hidden="true">{item.icon}</span>
-					<span>{item.text}</span>
-				</li>
-			{/each}
-		</ul>
+	<div class="section-content">
+		<div class="about-bio glass">
+			<p class="greeting">Hi, I'm Rafi.</p>
+			<p class="tagline">
+				I'm a Business Information Systems student at Binus International, based in Bogor, Indonesia.
+				I enjoy building clean, functional web experiences — from thoughtful UI to solid backends.
+			</p>
+			<ul class="status-list">
+				{#each status as item}
+					<li>
+						<span class="material-icons-round status-icon select-none" aria-hidden="true">{item.icon}</span>
+						<span>{item.text}</span>
+					</li>
+				{/each}
+			</ul>
+		</div>
+
+		<section class="sub-section">
+			<h2 class="section-heading">Education</h2>
+			<ul class="timeline">
+				{#await data.streamed.achievements}
+					<li class="loading">Loading…</li>
+				{:then achievements}
+					{#each achievements as achievement}
+						<Achievement icon={achievement.icon} name={achievement.name} date={achievement.date} />
+					{/each}
+				{:catch}
+					<li class="error">Could not load education data.</li>
+				{/await}
+			</ul>
+		</section>
+
+		<section class="sub-section">
+			<h2 class="section-heading">Skills</h2>
+			<ul class="skill-grid">
+				{#await data.streamed.skills}
+					<li class="loading">Loading…</li>
+				{:then skills}
+					{#each skills as skill}
+						<Skill icon={skill.icon} name={skill.name} level={skill.level} />
+					{/each}
+				{:catch}
+					<li class="error">Could not load skills data.</li>
+				{/await}
+			</ul>
+		</section>
 	</div>
-
-	<section class="sub-section">
-		<h2 class="section-heading">Education</h2>
-		<ul class="timeline">
-			{#await data.streamed.achievements}
-				<li class="loading">Loading…</li>
-			{:then achievements}
-				{#each achievements as achievement}
-					<Achievement icon={achievement.icon} name={achievement.name} date={achievement.date} />
-				{/each}
-			{:catch}
-				<li class="error">Could not load education data.</li>
-			{/await}
-		</ul>
-	</section>
-
-	<section class="sub-section">
-		<h2 class="section-heading">Skills</h2>
-		<ul class="skill-grid">
-			{#await data.streamed.skills}
-				<li class="loading">Loading…</li>
-			{:then skills}
-				{#each skills as skill}
-					<Skill icon={skill.icon} name={skill.name} level={skill.level} />
-				{/each}
-			{:catch}
-				<li class="error">Could not load skills data.</li>
-			{/await}
-		</ul>
-	</section>
 </section>
 
 <!-- ══════════════════════════════════════════
      WORK
 ══════════════════════════════════════════ -->
 <section id="work">
-	<h2 class="work-heading">Work</h2>
-	<div class="work-list">
-		{#each data.works as work, i}
-			<WorkCard {work} index={i} />
-		{/each}
+	<div class="section-content">
+		<h2 class="work-heading">Work</h2>
+		<div class="work-list">
+			{#each data.works as work, i}
+				<WorkCard {work} index={i} />
+			{/each}
+		</div>
 	</div>
 </section>
 
@@ -112,7 +116,7 @@
 	}
 
 	.hero-content {
-		@apply flex flex-col gap-12 w-full;
+		@apply flex flex-col gap-12 w-full max-w-4xl mx-auto;
 	}
 
 	h1 {
@@ -160,8 +164,12 @@
 	#about {
 		@apply flex flex-col;
 		min-height: 100vh;
-		padding: 6rem 4rem;
+		padding: 6rem 2rem;
 		gap: 3rem;
+	}
+
+	.section-content {
+		@apply flex flex-col gap-8 w-full max-w-4xl mx-auto;
 	}
 
 	.about-bio {
@@ -218,7 +226,7 @@
 	#work {
 		@apply flex flex-col;
 		min-height: 100vh;
-		padding: 6rem 4rem;
+		padding: 6rem 2rem;
 		gap: 0;
 	}
 
