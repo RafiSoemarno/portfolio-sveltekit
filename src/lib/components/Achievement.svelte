@@ -17,14 +17,19 @@
 
 <style lang="postcss">
 	.entry {
-		@apply flex items-start gap-4 relative list-none;
+		@apply flex items-start gap-4 relative list-none p-4 rounded-2xl;
+		background: rgba(255, 255, 255, 0.03);
+		border: 1px solid rgba(255, 255, 255, 0.06);
 	}
 
 	/* Timeline connector line */
 	.entry:not(:last-child)::after {
 		content: '';
-		@apply absolute left-[19px] top-10 w-px bg-white opacity-10;
-		height: calc(100% + 1.25rem);
+		@apply absolute bg-white opacity-10;
+		left: calc(1rem + 19px);
+		top: calc(1rem + 2.5rem);
+		width: 1px;
+		height: calc(100% + 0.5rem);
 	}
 
 	.icon-wrap {

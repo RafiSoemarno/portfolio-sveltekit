@@ -41,11 +41,12 @@
 <div class="base-background" aria-hidden="true" />
 <div class="gradient-background" aria-hidden="true" />
 <Starfield />
+<div id="cover" aria-hidden="true" />
 
 <style lang="postcss">
 	main {
 		@apply relative flex flex-col;
-		z-index: 3;
+		z-index: 10;
 	}
 
 	header {
@@ -80,6 +81,13 @@
 		z-index: 0;
 	}
 
+	#cover {
+		@apply fixed inset-0 select-none pointer-events-none opacity-50;
+		background-image: radial-gradient(transparent, rgb(24, 24, 27) 90%);
+		backdrop-filter: blur(4px);
+		z-index: 2;
+	}
+
 	@property --deg {
 		syntax: '<angle>';
 		inherits: false;
@@ -88,7 +96,7 @@
 
 	.gradient-background {
 		@apply fixed inset-0 opacity-20 pointer-events-none;
-		z-index: 1;
+		z-index: 3;
 		background: linear-gradient(var(--deg), #18181b 50%, #8ec5ff, #a3b3ff);
 		background-size: 180% 180%;
 		background-position: 50% 50%;

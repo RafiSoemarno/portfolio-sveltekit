@@ -32,7 +32,11 @@
 
 <style lang="postcss">
 	.work-card {
-		@apply flex flex-row items-center gap-10 w-full max-w-4xl mx-auto;
+		@apply flex flex-row items-center gap-10 w-full max-w-4xl mx-auto p-8;
+		background: rgba(255, 255, 255, 0.04);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 1.25rem;
+		backdrop-filter: blur(6px);
 	}
 
 	.work-card.image-right {

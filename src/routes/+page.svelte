@@ -30,7 +30,6 @@
      HERO
 ══════════════════════════════════════════ -->
 <section id="hero">
-	<div id="cover" aria-hidden="true" />
 	<div class="hero-content">
 		<h1>I build functional web experiences.</h1>
 		<button on:click={() => scrollTo('work')}>See my work.</button>
@@ -41,14 +40,12 @@
      ABOUT
 ══════════════════════════════════════════ -->
 <section id="about">
-	<aside class="about-left">
-		<div class="bio">
-			<p class="greeting">Hi, I'm Rafi.</p>
-			<p class="tagline">
-				I'm a Business Information Systems student at Binus International, based in Bogor, Indonesia.
-				I enjoy building clean, functional web experiences — from thoughtful UI to solid backends.
-			</p>
-		</div>
+	<div class="about-bio glass">
+		<p class="greeting">Hi, I'm Rafi.</p>
+		<p class="tagline">
+			I'm a Business Information Systems student at Binus International, based in Bogor, Indonesia.
+			I enjoy building clean, functional web experiences — from thoughtful UI to solid backends.
+		</p>
 		<ul class="status-list">
 			{#each status as item}
 				<li>
@@ -57,41 +54,37 @@
 				</li>
 			{/each}
 		</ul>
-	</aside>
-
-	<div class="about-divider" aria-hidden="true" />
-
-	<div class="about-right">
-		<section class="sub-section">
-			<h2 class="section-heading">Education</h2>
-			<ul class="timeline">
-				{#await data.streamed.achievements}
-					<li class="loading">Loading…</li>
-				{:then achievements}
-					{#each achievements as achievement}
-						<Achievement icon={achievement.icon} name={achievement.name} date={achievement.date} />
-					{/each}
-				{:catch}
-					<li class="error">Could not load education data.</li>
-				{/await}
-			</ul>
-		</section>
-
-		<section class="sub-section">
-			<h2 class="section-heading">Skills</h2>
-			<ul class="skill-grid">
-				{#await data.streamed.skills}
-					<li class="loading">Loading…</li>
-				{:then skills}
-					{#each skills as skill}
-						<Skill icon={skill.icon} name={skill.name} level={skill.level} />
-					{/each}
-				{:catch}
-					<li class="error">Could not load skills data.</li>
-				{/await}
-			</ul>
-		</section>
 	</div>
+
+	<section class="sub-section">
+		<h2 class="section-heading">Education</h2>
+		<ul class="timeline">
+			{#await data.streamed.achievements}
+				<li class="loading">Loading…</li>
+			{:then achievements}
+				{#each achievements as achievement}
+					<Achievement icon={achievement.icon} name={achievement.name} date={achievement.date} />
+				{/each}
+			{:catch}
+				<li class="error">Could not load education data.</li>
+			{/await}
+		</ul>
+	</section>
+
+	<section class="sub-section">
+		<h2 class="section-heading">Skills</h2>
+		<ul class="skill-grid">
+			{#await data.streamed.skills}
+				<li class="loading">Loading…</li>
+			{:then skills}
+				{#each skills as skill}
+					<Skill icon={skill.icon} name={skill.name} level={skill.level} />
+				{/each}
+			{:catch}
+				<li class="error">Could not load skills data.</li>
+			{/await}
+		</ul>
+	</section>
 </section>
 
 <!-- ══════════════════════════════════════════
@@ -116,11 +109,6 @@
 	#hero {
 		@apply flex items-center justify-center;
 		height: 100vh;
-	}
-
-	#cover {
-		@apply absolute inset-0 -z-10 select-none opacity-50;
-		background-image: radial-gradient(transparent, rgb(24, 24, 27) 90%);
 	}
 
 	.hero-content {
@@ -170,19 +158,18 @@
 
 	/* ══ About ══ */
 	#about {
-		@apply flex items-center;
+		@apply flex flex-col;
 		min-height: 100vh;
 		padding: 6rem 4rem;
-		gap: 3.5rem;
+		gap: 3rem;
 	}
 
-	.about-left {
-		@apply flex flex-col gap-8 flex-shrink-0;
-		width: 38%;
+	.about-bio {
+		@apply flex flex-col gap-6 p-8;
 	}
 
 	.greeting {
-		@apply text-5xl font-bold text-zinc-100 mb-3;
+		@apply text-5xl font-bold text-zinc-100;
 	}
 
 	.tagline {
@@ -202,12 +189,8 @@
 		font-size: 20px;
 	}
 
-	.about-divider {
-		@apply flex-shrink-0 self-stretch w-px bg-white opacity-10;
-	}
-
-	.about-right {
-		@apply flex flex-col gap-10 flex-1;
+	.sub-section {
+		@apply flex flex-col;
 	}
 
 	.section-heading {

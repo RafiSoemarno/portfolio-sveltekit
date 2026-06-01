@@ -17,8 +17,7 @@
 <style lang="postcss">
 	.skill {
 		@apply flex items-center gap-3 px-4 py-3 rounded-2xl bg-white bg-opacity-[0.07]
-		       border border-white border-opacity-[0.08] list-none
-		       transition-colors duration-200 hover:bg-opacity-[0.12];
+		       border border-white border-opacity-[0.08] list-none;
 	}
 
 	.skill-icon {
