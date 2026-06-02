@@ -1,0 +1,21 @@
+[
+  {
+    "title": "Portfolio Site",
+    "description": "This very site — a personal portfolio built with SvelteKit, Three.js, and TailwindCSS. Features a procedural starfield background and smooth page transitions.",
+    "image": "https://placehold.co/800x500",
+    "tech": ["SvelteKit", "Three.js", "TailwindCSS", "TypeScript"],
+    "link": "https://github.com/RafiSoemarno/portfolio-sveltekit"
+  },
+  {
+    "title": "Project Two",
+    "description": "A short description of the second project. What problem it solved, what you built, and what you learned.",
+    "image": "https://placehold.co/800x500",
+    "tech": ["React", "Node.js", "PostgreSQL"]
+  },
+  {
+    "title": "Project Three",
+    "description": "A short description of the third project. Replace this with real content once the data layer is connected.",
+    "image": "https://placehold.co/800x500",
+    "tech": ["Python", "FastAPI"]
+  }
+]

@@ -1,37 +1,45 @@
 <script lang="ts">
 	export let icon: string;
 	export let name: string;
-	export let level: number;
-	let dots: [boolean | null] = [null];
-
-	for (let i = 0; i < 5; i++) {
-		dots[i] = i < level ? true : false;
-	}
+	export let level: number; // retained for data compatibility
 </script>
 
-<div class="flex justify-between gap-4 bg-white bg-opacity-10 rounded-full p-4 px-6">
-	<div>
-		<span class={icon} />
-		<span class="ml-3 font-bold">{name}</span>
-	</div>
-	<div class="flex gap-1 items-center">
-		{#each dots as dot}
-			{#if dot}
-				<span class="material-icons-round select-none">circle</span>
-			{:else}
-				<span class="material-icons-outlined select-none">circle</span>
-			{/if}
+<li class="skill glass" title="Proficiency: {level}/5" aria-label="{name}, proficiency {level} out of 5">
+	<span class="{icon} skill-icon" aria-hidden="true" />
+	<span class="skill-name">{name}</span>
+	<span class="pip-row" aria-hidden="true">
+		{#each Array(5) as _, i}
+			<span class="pip {i < level ? 'filled' : ''}" />
 		{/each}
-	</div>
-</div>
+	</span>
+</li>
 
-<style>
-	.material-icons-round {
-		font-size: 16px;
-		vertical-align: middle;
+<style lang="postcss">
+	.skill {
+		@apply flex items-center gap-3 px-4 py-3 list-none;
 	}
-	.material-icons-outlined {
-		font-size: 16px;
-		vertical-align: middle;
+
+	.skill-icon {
+		@apply text-zinc-300 flex-shrink-0;
+		font-size: 18px;
+		width: 20px;
+		text-align: center;
+	}
+
+	.skill-name {
+		@apply text-zinc-200 font-medium flex-1;
+	}
+
+	.pip-row {
+		@apply flex gap-1 items-center flex-shrink-0;
+	}
+
+	.pip {
+		@apply block w-1.5 h-1.5 rounded-full bg-white opacity-20 transition-opacity duration-200;
+	}
+
+	.pip.filled {
+		@apply opacity-60;
 	}
 </style>
+

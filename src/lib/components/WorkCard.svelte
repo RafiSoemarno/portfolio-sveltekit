@@ -1,30 +1,92 @@
 <script lang="ts">
-	export let workId: number;
-	export let img = 'https://placehold.co/800x600';
-	export let alt = 'placeholder';
-	export let focused = false;
+	import type { Work } from '$lib/server/data';
+
+	export let work: Work;
+	export let index: number;
+
+	$: imageRight = index % 2 !== 0;
 </script>
 
-<div class="bounding-container {focused ? 'focused' : ''}" data-work-id={workId}>
-	<img src={img} {alt} />
-</div>
+<article class="work-card glass {imageRight ? 'image-right' : ''}">
+	<div class="image-wrap">
+		<img src={work.image} alt={work.title} />
+	</div>
+	<div class="content">
+		<h2>{work.title}</h2>
+		<p>{work.description}</p>
+		{#if work.tech && work.tech.length > 0}
+			<ul class="tech-list" aria-label="Technologies used">
+				{#each work.tech as tag}
+					<li>{tag}</li>
+				{/each}
+			</ul>
+		{/if}
+		{#if work.link}
+			<a href={work.link} target="_blank" rel="noopener noreferrer" class="project-link">
+				<span class="material-icons-round align-middle" aria-hidden="true">open_in_new</span>
+				View project
+			</a>
+		{/if}
+	</div>
+</article>
 
 <style lang="postcss">
-	.bounding-container {
-		@apply flex justify-center overflow-clip border-green-500 border-4 transition-all duration-300 select-none;
-		width: 400px;
+	.work-card {
+		@apply flex flex-col items-start gap-6 w-full p-5;
+	}
+
+	.work-card.image-right {
+		@apply md:flex-row-reverse;
+	}
+
+	@screen md {
+		.work-card {
+			@apply flex-row items-center gap-10 p-8;
+		}
+	}
+
+	.image-wrap {
+		@apply w-full rounded-2xl overflow-hidden;
+	}
+
+	@screen md {
+		.image-wrap {
+			@apply flex-shrink-0 w-80;
+		}
 	}
 
 	img {
-		@apply max-w-none bg-green-300 transition-all duration-500 pointer-events-none select-none;
-		height: 600px;
+		@apply w-full h-52 object-cover;
 	}
 
-	.focused {
-		transform: scaleX(2);
+	@screen md {
+		img {
+			@apply h-56;
+		}
 	}
 
-	.focused > img {
-		@apply scale-x-50;
+	.content {
+		@apply flex flex-col gap-4 flex-1;
+	}
+
+	h2 {
+		@apply text-3xl font-semibold text-zinc-100;
+	}
+
+	p {
+		@apply text-zinc-300 leading-relaxed;
+	}
+
+	.tech-list {
+		@apply flex flex-wrap gap-2 list-none p-0 m-0;
+	}
+
+	.tech-list li {
+		@apply text-sm text-zinc-300 bg-white bg-opacity-10 rounded-full px-3 py-1;
+	}
+
+	.project-link {
+		@apply flex items-center gap-1 w-fit text-blue-300 hover:text-blue-200 transition-colors duration-200;
 	}
 </style>
+

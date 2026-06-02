@@ -1,0 +1,8 @@
+[
+  { "icon": "fab fa-js", "name": "JavaScript", "level": 5 },
+  { "icon": "fab fa-html5", "name": "HTML / CSS", "level": 5 },
+  { "icon": "fab fa-react", "name": "React", "level": 4 },
+  { "icon": "fab fa-node-js", "name": "Node.js", "level": 4 },
+  { "icon": "fab fa-python", "name": "Python", "level": 3 },
+  { "icon": "fab fa-git-alt", "name": "Git", "level": 4 }
+]
