@@ -2,6 +2,7 @@
 	import Skill from '$lib/components/Skill.svelte';
 	import Achievement from '$lib/components/Achievement.svelte';
 	import WorkCard from '$lib/components/WorkCard.svelte';
+	import { triggerWarp } from '$lib/starfieldStore';
 	import type { PageData } from './$types';
 	import { spring } from 'svelte/motion';
 	import { browser } from '$app/environment';
@@ -57,7 +58,7 @@
 			I build functional web experiences.
 		</h1>
 		<div class="hero-cta" style="transform: translate3d({$drift.x * 6}px, {$drift.y * 6}px, 0);">
-			<button on:click={() => scrollTo('work')}>See my work.</button>
+			<button on:click={() => { triggerWarp(); scrollTo('work'); }}>See my work.</button>
 		</div>
 	</div>
 </section>
