@@ -3,6 +3,8 @@
 	import Achievement from '$lib/components/Achievement.svelte';
 	import WorkCard from '$lib/components/WorkCard.svelte';
 	import type { PageData } from './$types';
+	import { spring } from 'svelte/motion';
+	import { browser } from '$app/environment';
 
 	export let data: PageData;
 
@@ -16,7 +18,24 @@
 	function scrollTo(id: string) {
 		document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 	}
+
+	// Pointer parallax: shifts opposite the starfield's camera pan, with a slight 3D tilt.
+	const tilt = spring({ x: 0, y: 0 }, { stiffness: 0.03, damping: 0.25, precision: 0.00001 });
+	// Hero button: same pointer feed, higher damping so it trails the heading.
+	const drift = spring({ x: 0, y: 0 }, { stiffness: 0.03, damping: 0.4, precision: 0.00001 });
+
+	const reducedMotion = browser ? matchMedia('(prefers-reduced-motion: reduce)') : null;
+
+	function tiltToPointer(event: MouseEvent) {
+		if (reducedMotion?.matches) return;
+		const nx = event.clientX / window.innerWidth - 0.5;
+		const ny = event.clientY / window.innerHeight - 0.5;
+		tilt.set({ x: nx, y: ny });
+		drift.set({ x: nx, y: ny });
+	}
 </script>
+
+<svelte:window on:mousemove={tiltToPointer} />
 
 <svelte:head>
 	<title>Rafi Soemarno</title>
@@ -31,8 +50,15 @@
 ══════════════════════════════════════════ -->
 <section id="hero">
 	<div class="hero-content">
-		<h1>I build functional web experiences.</h1>
-		<button on:click={() => scrollTo('work')}>See my work.</button>
+		<h1
+			style="transform: perspective(800px) translate3d({$tilt.x * 12}px, {$tilt.y * 12}px, 0)
+				rotateY({$tilt.x * 4}deg) rotateX({$tilt.y * -4}deg);"
+		>
+			I build functional web experiences.
+		</h1>
+		<div class="hero-cta" style="transform: translate3d({$drift.x * 6}px, {$drift.y * 6}px, 0);">
+			<button on:click={() => scrollTo('work')}>See my work.</button>
+		</div>
 	</div>
 </section>
 
@@ -123,11 +149,20 @@
 
 	h1 {
 		@apply text-6xl font-semibold text-center text-zinc-100 overflow-hidden;
+		will-change: transform;
+	}
+
+	/* Parallax carrier: keeps its own stacking context so the button's ::after
+	   glow (z-index: -1) can still paint behind the button itself. */
+	.hero-cta {
+		@apply w-fit mx-auto;
+		will-change: transform;
 	}
 
 	button {
 		@apply relative text-4xl w-fit font-semibold text-zinc-200 mx-auto p-4 rounded-2xl
-		       border-4 border-zinc-200 transition-all duration-500 cursor-pointer;
+		       border-4 border-zinc-200 cursor-pointer
+		       transition-[background-color,color,border-color] duration-500;
 	}
 
 	button:hover {
