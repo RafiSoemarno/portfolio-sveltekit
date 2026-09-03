@@ -2,6 +2,7 @@
 	import Skill from '$lib/components/Skill.svelte';
 	import Achievement from '$lib/components/Achievement.svelte';
 	import WorkCard from '$lib/components/WorkCard.svelte';
+	import { triggerWarp } from '$lib/starfieldStore';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -32,7 +33,7 @@
 <section id="hero">
 	<div class="hero-content">
 		<h1>I build functional web experiences.</h1>
-		<button on:click={() => scrollTo('work')}>See my work.</button>
+		<button on:click={() => { triggerWarp(); scrollTo('work'); }}>See my work.</button>
 	</div>
 </section>
 
